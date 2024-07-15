@@ -68,32 +68,32 @@ export class DateCalculation {
     }
 
     #calculateWorkingDays(startDate, endDate) {
-        let i = 0;
+        let calculatedWorkingDays = 0;
         for (let currentDate = new Date(startDate); currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
             let day = currentDate.getDay();
             if (day !== 0 && day !== 6) {
-                i++;
+                calculatedWorkingDays++;
             }
         }
-        return i;
+        return calculatedWorkingDays;
     }
 
     #calculateWeekendDays(startDate, endDate) {
-        let i = 0;
+        let calculatedWeekendDays = 0;
         for (let currentDate = new Date(startDate); currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
             let day = currentDate.getDay();
             if (day === 0 || day === 6) {
-                i++;
+                calculatedWeekendDays++;
             }
         }
-        return i;
+        return calculatedWeekendDays;
     }
 
     #calculateDayType() {
-        let startDate = new Date(this.#startDate.value);
-        let endDate = new Date(this.#endDate.value);
-        let dayType = this.#dayType.value;
-        let dayDifference = endDate - startDate
+        const startDate = new Date(this.#startDate.value);
+        const endDate = new Date(this.#endDate.value);
+        const dayType = this.#dayType.value;
+        const dayDifference = endDate - startDate
         let dayTypeResult;
 
         if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
@@ -101,48 +101,76 @@ export class DateCalculation {
             return this.#dayType.value = 'default';
         }
 
-        if (dayType === 'allDays') {
-            return dayTypeResult = dayDifference / (1000 * 60 * 60 * 24);
-        } else if (dayType === 'workingDays') {
-            return dayTypeResult = this.#calculateWorkingDays(startDate, endDate);
-        } else if (dayType === 'weekendDays') {
-            return dayTypeResult = this.#calculateWeekendDays(startDate, endDate);
+        switch (dayType) {
+            case 'allDays':
+                dayTypeResult = dayDifference / (1000 * 60 * 60 * 24);
+                break;
+            case 'workingDays':
+                dayTypeResult = this.#calculateWorkingDays(startDate, endDate);
+                break;
+            case 'weekendDays':
+                dayTypeResult = this.#calculateWeekendDays(startDate, endDate);
+                break;
+            default:
+                alert('Неправильний тип дня.')
         }
+
+        return dayTypeResult;
     }
 
     #calculateUnitType() {
-        let dayTypeResult = this.#calculateDayType();
-        let unitType = this.#unitType.value;
+        const dayTypeResult = this.#calculateDayType();
+        const unitType = this.#unitType.value;
         let unitTypeResult;
 
         if (isNaN(dayTypeResult)) {
             return this.#unitType.value = 'default';
         }
 
-        if (unitType === 'days') {
-            return unitTypeResult = dayTypeResult;
-        } else if (unitType === 'hours') {
-            return unitTypeResult = dayTypeResult * 24;
-        } else if (unitType === 'minutes') {
-            return unitTypeResult = dayTypeResult * 24 * 60;
-        } else if (unitType === 'seconds') {
-            return unitTypeResult = dayTypeResult * 24 * 60 * 60;
+        switch (unitType) {
+            case 'days':
+                unitTypeResult = dayTypeResult;
+                break;
+            case 'hours':
+                unitTypeResult = dayTypeResult * 24;
+                break;
+            case 'minutes':
+                unitTypeResult = dayTypeResult * 24 * 60;
+                break;
+            case 'seconds':
+                unitTypeResult = dayTypeResult * 24 * 60 * 60;
+                break;
+            default:
+                alert('Неправильний тип одиниці вимірювання.')
         }
+
+        return unitTypeResult;
     }
 
     #calculateDateDifference() {
-        let startDate = new Date(this.#startDate.value);
-        let endDate = new Date(this.#endDate.value);
-        let unitType = this.#unitType.value;
-        let unitTypeResult = this.#calculateUnitType();
+        const startDate = new Date(this.#startDate.value);
+        const endDate = new Date(this.#endDate.value);
+        const unitType = this.#unitType.value;
+        const unitTypeResult = this.#calculateUnitType();
 
-        this.#generalResult.textContent = `Результат обрахунку: ${unitTypeResult} ${unitType === 'days' ? 'днів' : unitType === 'hours' ? 'годин' : unitType === 'minutes' ? 'хвилин' : 'секунд'}`;
+        let unitTypeText;
+        if (unitType === 'days') {
+            unitTypeText = 'днів';
+        } else if (unitType === 'hours') {
+            unitTypeText = 'годин';
+        } else if (unitType === 'minutes') {
+            unitTypeText = 'хвилин';
+        } else {
+            unitTypeText = 'секунд';
+        }
+
+        this.#generalResult.textContent = `Результат обрахунку: ${unitTypeResult} ${unitTypeText}`;
 
         let resultsTable = document.querySelector(".resultsTable").getElementsByTagName("tbody")[0];
         let tableRow = resultsTable.insertRow(0);
         tableRow.insertCell(0).innerHTML = this.#formatDate(startDate);
         tableRow.insertCell(1).innerHTML = this.#formatDate(endDate);
-        tableRow.insertCell(2).innerHTML = `${unitTypeResult} ${unitType === 'days' ? 'днів' : unitType === 'hours' ? 'годин' : unitType === 'minutes' ? 'хвилин' : 'секунд'}`;
+        tableRow.insertCell(2).innerHTML = `${unitTypeResult} ${unitTypeText}`;
 
         if (resultsTable.rows.length > 10) {
             resultsTable.deleteRow(10);
@@ -157,9 +185,9 @@ export class DateCalculation {
     }
 
     #verifyFormCompletion() {
-        let dayRangePreset = this.#daysRangePreset.value;
-        let dayType = this.#dayType.value;
-        let unitType = this.#unitType.value;
+        const dayRangePreset = this.#daysRangePreset.value;
+        const dayType = this.#dayType.value;
+        const unitType = this.#unitType.value;
 
         if (dayRangePreset !== 'default' && dayType !== 'default' && unitType !== 'default') {
             return this.#calculateResultsBtn.classList.remove('btnDisabled');

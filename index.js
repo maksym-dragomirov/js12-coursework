@@ -19,10 +19,3 @@ import { BasePage } from './BasePage.js';
         })
     }
 })();
-
-
-(async () => {
-    const calendarAPI = new CalendarAPI();
-    // console.log(await calendarAPI.getCountries());
-    // console.log(await calendarAPI.getHolidays());
-})()
