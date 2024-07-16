@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Дата та свята</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap">
 </head>
 <body>
 <div class="tabs">
@@ -14,37 +15,49 @@
 
 <div id="dateDifference" class="dateDifference tabContent">
     <h2>Розрахунок проміжку часу</h2>
-    <label for="startDate">Початкова дата:</label>
-    <input type="date" id="startDate" class="startDate">
 
-    <label for="endDate">Кінцева дата:</label>
-    <input type="date" id="endDate" class="endDate">
+    <div class="datePickers">
+        <div class="dateField">
+            <label for="startDate">Початкова дата:</label>
+            <input type="date" id="startDate" class="startDate">
+        </div>
+        <div class="dateField">
+            <label for="endDate">Кінцева дата:</label>
+            <input type="date" id="endDate" class="endDate">
+        </div>
+    </div>
 
-    <label for="daysRangePreset">Вибір проміжку часу:</label>
-    <select id="daysRangePreset" class="daysRangePreset">
-        <option value="default">Обрати проміжок часу</option>
-        <option value="7">Тиждень</option>
-        <option value="30">Місяць</option>
-    </select>
+    <div class="dropdowns">
+        <div class="dropdownField">
+            <label for="daysRangePreset">Вибір проміжку часу:</label>
+            <select id="daysRangePreset" class="daysRangePreset">
+                <option value="default">Обрати проміжок часу</option>
+                <option value="7">Тиждень</option>
+                <option value="30">Місяць</option>
+            </select>
+        </div>
+        <div class="dropdownField">
+            <label for="dayType">Тип днів:</label>
+            <select id="dayType" class="dayType">
+                <option value="default">Обрати тип днів</option>
+                <option value="allDays">Всі дні</option>
+                <option value="workingDays">Будні дні</option>
+                <option value="weekendDays">Вихідні дні</option>
+            </select>
+        </div>
+        <div class="dropdownField">
+            <label for="unitType">Одиниця виміру:</label>
+            <select id="unitType" class="unitType">
+                <option value="default">Обрати тип обрахунку</option>
+                <option value="days">Порахувати кількість днів</option>
+                <option value="hours">Порахувати кількість годин</option>
+                <option value="minutes">Порахувати кількість хвилин</option>
+                <option value="seconds">Порахувати кількість секунд</option>
+            </select>
+        </div>
+    </div>
 
-    <label for="dayType">Тип днів:</label>
-    <select id="dayType" class="dayType">
-        <option value="default">Обрати тип днів</option>
-        <option value="allDays">Всі дні</option>
-        <option value="workingDays">Будні дні</option>
-        <option value="weekendDays">Вихідні дні</option>
-    </select>
-
-    <label for="unitType">Одиниця виміру:</label>
-    <select id="unitType" class="unitType">
-        <option value="default">Обрати тип обрахунку</option>
-        <option value="days">Порахувати кількість днів</option>
-        <option value="hours">Порахувати кількість годин</option>
-        <option value="minutes">Порахувати кількість хвилин</option>
-        <option value="seconds">Порахувати кількість секунд</option>
-    </select>
-
-    <button class="calculateResults">Розрахувати</button>
+    <button class="calculateResults" disabled>Розрахувати</button>
 
     <p class="dateResult"></p>
 
@@ -63,27 +76,32 @@
 </div>
 
 <div id="holidays" class="holidaysTab tabContent hiddenTab">
-    <h2>Свята по країнам</h2>
-    <label for="country">Країна:</label>
-    <select id="country" class="selectedCountry">
-        <option value="default">Оберіть країну</option>
-    </select>
+    <div class="dropdowns">
+        <div class="dropdownField">
+            <h2>Свята по країнам</h2>
+            <label for="country">Країна:</label>
+            <select id="country" class="selectedCountry">
+                <option value="default">Оберіть країну</option>
+            </select>
+            <div class="dropdownField">
+                <label for="year">Рік:</label>
+                <select id="year" class="selectedYear"></select>
+            </div>
+        </div>
 
-    <label for="year">Рік:</label>
-    <select id="year" class="selectedYear"></select>
 
-    <table class="holidaysTable">
-        <thead>
-        <tr>
-            <th>Свято</th>
-            <th>Дата</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
+        <table class="holidaysTable">
+            <thead>
+            <tr>
+                <th>Свято</th>
+                <th>Дата</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 
-<script src="index.js" type="module"></script>
+    <script src="index.js" type="module"></script>
 </body>
 </html>
