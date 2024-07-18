@@ -41,8 +41,7 @@ export class CalendarAPI {
                 }
             )
         }
-        // Коли рядок 45 розкоментований - як тільки користувач обере країну, додаток відправить запит на api/holidays для обраної країни і 2024 року
-        // this.#selectedCountry.addEventListener('change', this.#showHolidaysTable);
+        this.#selectedCountry.addEventListener('change', this.#showHolidaysTable);
         this.#selectedYear.addEventListener('change', this.#showHolidaysTable);
         this.#pageContainer.addEventListener('change', this.#verifyCountrySelection.bind(this));
         this.#verifyCountrySelection();

@@ -103,7 +103,7 @@ export class DateCalculation {
 
         switch (dayType) {
             case 'allDays':
-                dayTypeResult = dayDifference / (1000 * 60 * 60 * 24);
+                dayTypeResult = dayDifference / (1000 * 60 * 60 * 24) + 1;
                 break;
             case 'workingDays':
                 dayTypeResult = this.#calculateWorkingDays(startDate, endDate);
@@ -185,14 +185,16 @@ export class DateCalculation {
     }
 
     #verifyFormCompletion() {
-        const dayRangePreset = this.#daysRangePreset.value;
         const dayType = this.#dayType.value;
         const unitType = this.#unitType.value;
 
-        if (dayRangePreset !== 'default' && dayType !== 'default' && unitType !== 'default') {
-            return this.#calculateResultsBtn.classList.remove('btnDisabled');
+        if (dayType !== 'default' && unitType !== 'default') {
+            this.#calculateResultsBtn.disabled = false;
+            this.#calculateResultsBtn.classList.add('enabled');
+
         } else {
-            return this.#calculateResultsBtn.classList.add('btnDisabled');
+            this.#calculateResultsBtn.disabled = true;
+            this.#calculateResultsBtn.classList.add('disabled');
         }
     }
 

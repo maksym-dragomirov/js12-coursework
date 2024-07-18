@@ -2,9 +2,122 @@
     display: none;
 }
 
-.btnDisabled {
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #07bef6;
+    padding: 16px;
+}
+
+.tabLink {
+    background: #fff;
+    border: none;
+    padding: 16px 32px;
+    margin: 0 8px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #07bef6;
+    border-radius: 5px;
+}
+
+.tabLink:hover {
+    background-color: #e9ecef;
+}
+
+.tabContent {
+    padding: 32px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tabContent.active {
+    display: block;
+}
+
+.datePickers, .dropdowns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.datePickers label, .dropdowns label {
+    flex: 1 1 100%;
+}
+
+.datePickers input[type="date"], .dropdowns select {
+    flex: 1 1 48%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button.calculateResults {
+    background-color: #ccc;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
     cursor: not-allowed;
-    pointer-events:none;
-    color: #c0c0c0;
-    /*background-color: #ffffff;*/
+    font-size: 16px;
+}
+
+button.calculateResults.enabled {
+    background-color: #07bef6;
+    cursor: pointer;
+}
+
+button.calculateResults.enabled:hover {
+    background-color: #06a7dc;
+}
+
+.dateResult {
+    margin: 16px 0;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #07bef6;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tabLink {
+        margin: 8px 0;
+    }
+
+    .tabContent {
+        padding: 16px;
+    }
+
+    .datePickers input[type="date"], .dropdowns select {
+        flex: 1 1 100%;
+    }
 }
