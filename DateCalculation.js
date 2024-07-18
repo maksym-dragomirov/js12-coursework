@@ -219,10 +219,21 @@ export class DateCalculation {
 
         dates.reverse();
         dates.forEach(date => {
+            let unitTypeText;
+            if (date.unitType === 'days') {
+                unitTypeText = 'днів';
+            } else if (date.unitType === 'hours') {
+                unitTypeText = 'годин';
+            } else if (date.unitType === 'minutes') {
+                unitTypeText = 'хвилин';
+            } else {
+                unitTypeText = 'секунд';
+            }
+
             let tableRow = resultsTable.insertRow();
             tableRow.insertCell(0).innerHTML = date.startDate;
             tableRow.insertCell(1).innerHTML = date.endDate;
-            tableRow.insertCell(2).innerHTML = `${date.unitTypeResult} ${date.unitType === 'days' ? 'днів' : date.unitType === 'hours' ? 'годин' : date.unitType === 'minutes' ? 'хвилин' : 'секунд'}`;
+            tableRow.insertCell(2).innerHTML = `${date.unitTypeResult} ${unitTypeText}`;
         })
     }
 }
