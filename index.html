@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Дата та свята</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="tabs">
+    <button class="tabLink calculator" data-test="dateDifference">Проміжок часу</button>
+    <button class="tabLink holidays" data-test="holidays">Свята</button>
+</div>
+
+<div id="dateDifference" class="dateDifference tabContent">
+    <h2>Розрахунок проміжку часу</h2>
+    <label for="startDate">Початкова дата:</label>
+    <input type="date" id="startDate" class="startDate">
+
+    <label for="endDate">Кінцева дата:</label>
+    <input type="date" id="endDate" class="endDate">
+
+    <label for="daysRangePreset">Вибір проміжку часу:</label>
+    <select id="daysRangePreset" class="daysRangePreset">
+        <option value="default">Обрати проміжок часу</option>
+        <option value="7">Тиждень</option>
+        <option value="30">Місяць</option>
+    </select>
+
+    <label for="dayType">Тип днів:</label>
+    <select id="dayType" class="dayType">
+        <option value="default">Обрати тип днів</option>
+        <option value="allDays">Всі дні</option>
+        <option value="workingDays">Будні дні</option>
+        <option value="weekendDays">Вихідні дні</option>
+    </select>
+
+    <label for="unitType">Одиниця виміру:</label>
+    <select id="unitType" class="unitType">
+        <option value="default">Обрати тип обрахунку</option>
+        <option value="days">Порахувати кількість днів</option>
+        <option value="hours">Порахувати кількість годин</option>
+        <option value="minutes">Порахувати кількість хвилин</option>
+        <option value="seconds">Порахувати кількість секунд</option>
+    </select>
+
+    <button class="calculateResults">Розрахувати</button>
+
+    <p class="dateResult"></p>
+
+    <h3>Останні результати</h3>
+    <table class="resultsTable">
+        <thead>
+        <tr>
+            <th>Початкова дата</th>
+            <th>Кінцева дата</th>
+            <th>Результат</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div id="holidays" class="holidaysTab tabContent hiddenTab">
+    <h2>Свята по країнам</h2>
+    <label for="country">Країна:</label>
+    <select id="country" class="selectedCountry">
+        <option value="default">Оберіть країну</option>
+    </select>
+
+    <label for="year">Рік:</label>
+    <select id="year" class="selectedYear"></select>
+
+    <table class="holidaysTable">
+        <thead>
+        <tr>
+            <th>Свято</th>
+            <th>Дата</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script src="index.js" type="module"></script>
+</body>
+</html>
