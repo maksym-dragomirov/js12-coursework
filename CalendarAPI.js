@@ -80,7 +80,7 @@ export class CalendarAPI {
         }
     }
 
-    #fillCountriesDropDown = (countries) => {
+    #fillCountriesDropDown = async (countries) => {
         countries.forEach(country => {
             const countryOption = document.createElement('option');
             countryOption.value = country['iso-3166'];
@@ -91,7 +91,7 @@ export class CalendarAPI {
 
     #returnCountriesToUser = async () => {
         const countries = await this.#getCountries();
-        this.#fillCountriesDropDown(countries);
+        await this.#fillCountriesDropDown(countries);
     }
 
     #fillYearsDropDown = async () => {
@@ -149,7 +149,7 @@ export class CalendarAPI {
         return match ? match[1] : date;
     }
 
-    async #renderHolidaysTable(holidays) {
+    #renderHolidaysTable = async (holidays) => {
         if (this.#selectedCountry.value !== 'default' && this.#selectedYear.value !== null) {
             let resultsTable = document.querySelector(".holidaysTable").getElementsByTagName("tbody")[0];
             resultsTable.innerHTML = '';
