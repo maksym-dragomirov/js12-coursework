@@ -41,8 +41,8 @@ export class CalendarAPI {
                 }
             )
         }
-        this.#selectedCountry.addEventListener('change', this.#showHolidaysTable);
-        this.#selectedYear.addEventListener('change', this.#showHolidaysTable);
+        this.#selectedCountry.addEventListener('change', this.#showHolidaysTable.bind(this));
+        this.#selectedYear.addEventListener('change', this.#showHolidaysTable.bind(this));
         this.#pageContainer.addEventListener('change', this.#verifyCountrySelection.bind(this));
         this.#verifyCountrySelection();
     }
